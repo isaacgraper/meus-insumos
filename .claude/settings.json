@@ -1,0 +1,36 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-settings.json",
+  "permissions": {
+    "allow": [
+      "Read(**)",
+      "Edit(backend/**)",
+      "Edit(frontend/**)",
+      "Edit(docs/**)",
+      "Write(docs/**)",
+      "Bash(uv run:*)",
+      "Bash(pytest:*)",
+      "Bash(ruff:*)",
+      "Bash(alembic:*)",
+      "Bash(npm run:*)",
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git add:*)",
+      "Bash(rg:*)"
+    ],
+    "deny": [
+      "Read(./.env)",
+      "Read(./.env.*)",
+      "Read(./**/secrets/**)",
+      "Bash(git push:*)",
+      "Bash(docker compose down -v:*)",
+      "Bash(alembic downgrade:*)",
+      "Bash(psql:*)",
+      "Bash(rm -rf:*)"
+    ]
+  },
+  "env": {
+    "APP_ENV": "development",
+    "TZ": "America/Sao_Paulo"
+  }
+}
