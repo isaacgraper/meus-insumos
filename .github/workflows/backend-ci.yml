@@ -1,0 +1,47 @@
+name: backend-ci
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches: [dev, main]
+
+# Least privilege: CI only needs to read the code.
+permissions:
+  contents: read
+
+# Superseded runs on the same branch are cancelled, but never on dev/main —
+# every commit on an integration branch keeps its own recorded result.
+concurrency:
+  group: backend-ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/main' }}
+
+jobs:
+  backend:
+    name: Lint e testes do backend
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar uv
+        uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+
+      - name: Instalar dependências
+        run: uv sync --all-groups
+
+      - name: Ruff — lint
+        run: uv run ruff check .
+
+      - name: Ruff — formatação
+        run: uv run ruff format --check .
+
+      # Cobertura mínima de 70% (RNF10). Testes usam PostgreSQL real via
+      # testcontainers — o runner ubuntu-latest já provê Docker.
+      - name: Testes com cobertura
+        run: uv run pytest --cov=app --cov-report=term-missing --cov-fail-under=70

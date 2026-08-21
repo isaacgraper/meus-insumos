@@ -1,0 +1,12 @@
+# Revisão obrigatória por dono de código.
+# Sintaxe: https://docs.github.com/pt/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+
+*                       @isaacgraper
+
+# Áreas sensíveis — mantenha revisão explícita mesmo ao adicionar colaboradores.
+/docs/specs/            @isaacgraper
+/docs/security/         @isaacgraper
+/docs/architecture/     @isaacgraper
+/backend/migrations/    @isaacgraper
+/.github/               @isaacgraper
+/CLAUDE.md              @isaacgraper
