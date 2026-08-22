@@ -32,8 +32,10 @@ jobs:
         with:
           enable-cache: true
 
+      # --locked falha se uv.lock estiver defasado em relação ao
+      # pyproject.toml, em vez de re-resolver silenciosamente.
       - name: Instalar dependências
-        run: uv sync --all-groups
+        run: uv sync --all-groups --locked
 
       - name: Ruff — lint
         run: uv run ruff check .
