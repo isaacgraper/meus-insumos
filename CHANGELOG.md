@@ -1,21 +1,21 @@
 # Changelog
 
-Todas as mudanças relevantes deste projeto são registradas neste arquivo.
+All notable changes to this project are recorded in this file.
 
-O formato segue [Keep a Changelog](https://keepachangelog.com/pt-BR/1.1.0/) e o
-versionamento segue [Semantic Versioning](https://semver.org/lang/pt-BR/).
+The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and
+versioning follows [Semantic Versioning](https://semver.org/).
 
-Todo Pull Request adiciona sua entrada em `[Unreleased]`. No PR de release, as
-entradas de `[Unreleased]` são movidas para uma nova seção de versão datada —
-ver [`docs/process/branching-and-releases.md`](docs/process/branching-and-releases.md).
+Every Pull Request adds its entry under `[Unreleased]`. In the release PR, those
+entries are moved into a new dated version section — see
+[`docs/process/branching-and-releases.md`](docs/process/branching-and-releases.md).
 
 ## [Unreleased]
 
-### Adicionado
+### Added
 
-- Estrutura inicial do projeto: backend FastAPI, frontend Next.js, Docker
-  Compose e documentação de especificação.
-- Processo de branching e releases (`dev` → `main` via PR de release),
-  templates de Pull Request, CODEOWNERS e workflows de CI.
+- Initial project structure: FastAPI backend, Next.js frontend, Docker Compose
+  and specification documentation.
+- Branching and release process (`dev` → `main` via a release PR), Pull Request
+  templates, CODEOWNERS and CI workflows.
 
 [Unreleased]: https://github.com/isaacgraper/sigi/commits/dev

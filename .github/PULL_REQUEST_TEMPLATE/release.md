@@ -1,77 +1,70 @@
-## Release vX.Y.Z
-
 <!--
-PR de release: dev → main.
-Este corpo vira as notas da GitHub Release. É o registro de auditoria da versão.
-Processo completo: docs/process/branching-and-releases.md
+Release PR: dev → main.
+This body becomes the GitHub Release notes and is the audit record for the version.
+Full process: docs/process/branching-and-releases.md
 -->
 
-**Versão anterior:** `vX.Y.Z`
-**Data prevista de implantação:**
+Releases vX.Y.Z. <!-- One paragraph, in business terms: what this version delivers. -->
 
-## Resumo da versão
+**Previous version:** `vX.Y.Z`
+**Planned deployment date:**
 
-<!-- Dois ou três parágrafos: o que esta versão entrega, em linguagem de negócio. -->
-
-## PRs incluídos
+### Included PRs
 
 <!-- git log --oneline --no-merges vX.Y.Z..dev -->
 
-### Funcionalidades
+* **Features**
+  * #___ —
+* **Fixes**
+  * #___ —
+* **Infrastructure & Documentation**
+  * #___ —
 
-- [ ] #___ —
+### Specs Delivered
 
-### Correções
+<!-- IDs of the specs whose implementation is complete in this version. -->
 
-- [ ] #___ —
+* `SPEC-____` —
 
-### Infraestrutura e documentação
+### Database Migrations
 
-- [ ] #___ —
+- [ ] This version contains no migrations
+- [ ] Contains migrations — listed below
 
-## Specs entregues
+| Alembic revision | Description | Reversible |
+| ---------------- | ----------- | ---------- |
+|                  |             |            |
 
-<!-- IDs das specs cuja implementação está completa nesta versão. -->
-
-- `SPEC-____` —
-
-## Migrações de banco
-
-- [ ] Esta versão não contém migrações
-- [ ] Contém migrações — listadas abaixo
-
-| Revisão Alembic | Descrição | Reversível |
-| --------------- | --------- | ---------- |
-|                 |           |            |
-
-**Comando de aplicação:**
+**Apply with:**
 
 ```bash
 docker compose exec backend alembic upgrade head
 ```
 
-## Notas de implantação
+### Deployment Notes
 
-<!-- Variáveis de ambiente novas, ordem de subida dos serviços, janela necessária. -->
+<!-- New environment variables, service start order, required window. -->
 
-- [ ] Novas variáveis de ambiente documentadas em `.env.example`
-- [ ] Nenhuma indisponibilidade prevista / janela acordada:
+### Rollback Plan
 
-## Plano de rollback
+<!-- How to go back. If a migration is irreversible, say so explicitly. -->
 
-<!-- Como voltar. Se houver migração irreversível, diga explicitamente. -->
+* Rollback tag: `vX.Y.Z`
+* Migrations reverted by:
 
-- Tag de retorno: `vX.Y.Z`
-- Migrações revertidas por:
-- [ ] Rollback testado em homologação
+### Sign-off
 
-## Sign-off
+<!--
+This checklist is deliberate: unlike a regular PR, a release PR is the auditable
+record of what was verified before a version reached production.
+-->
 
-- [ ] Todos os checks de CI verdes na `dev`
-- [ ] `CHANGELOG.md` com a seção `[X.Y.Z]` preenchida e datada
-- [ ] `version` atualizada em `backend/pyproject.toml` e `frontend/package.json`
-- [ ] Nenhuma spec incluída está em `Draft`
-- [ ] Questões em aberto bloqueantes (`docs/open-questions.md`) resolvidas
-- [ ] Merge será feito com **merge commit**, não squash
-- [ ] Tag `vX.Y.Z` e GitHub Release publicadas imediatamente após o merge
-- [ ] `main` mesclada de volta em `dev` após a release
+- [ ] All CI checks green on `dev`
+- [ ] `CHANGELOG.md` has a filled and dated `[X.Y.Z]` section
+- [ ] `version` updated in `backend/pyproject.toml` and `frontend/package.json`
+- [ ] No included spec is still in `Draft`
+- [ ] Blocking open questions (`docs/open-questions.md`) resolved
+- [ ] Rollback tested in staging
+- [ ] Will be merged with a **merge commit**, not a squash
+- [ ] Tag `vX.Y.Z` and GitHub Release published immediately after the merge
+- [ ] `main` merged back into `dev` after the release

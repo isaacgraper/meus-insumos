@@ -1,23 +1,25 @@
-# Branching e Releases
+# Branching and Releases
 
-> Como o código sai do editor e chega em produção. Este documento é normativo.
+> How code leaves the editor and reaches production. This document is normative.
 
-O SIGI atende uma entidade governamental estadual. Uma mudança em produção
-precisa ser auditável: quem escreveu, quem revisou, quando entrou, e em qual
-versão. O modelo abaixo existe para garantir isso.
+SIGI serves a state government entity. A change in production must be auditable:
+who wrote it, who reviewed it, when it landed, and in which version. The model
+below exists to guarantee that.
 
-## Modelo de branches
+Domain vocabulary stays in Portuguese — `ATA`, `NE`, `NF`, `empenho`, `saldo`.
+
+## Branch model
 
 ```
 feature/*  fix/*  chore/*
         \    |    /
-         \   |   /          PR + CI  (revisão contínua)
+         \   |   /          PR + CI  (continuous review)
           v  v  v
-            dev             integração — sempre verde, sempre implantável
+            dev             integration — always green, always deployable
              |
-             |              PR de release  (evento deliberado)
+             |              release PR  (deliberate event)
              v
-            main            somente release — cada commit é uma versão marcada
+            main            release only — every commit is a tagged version
              |
              v
           tag vX.Y.Z + GitHub Release
@@ -25,81 +27,82 @@ feature/*  fix/*  chore/*
 
 ### `main`
 
-- Contém apenas código liberado. Todo commit em `main` corresponde a uma versão.
-- Protegida: exige PR, exige checks verdes, não aceita force-push nem deleção.
-- Avança **exclusivamente** por PR de release vindo de `dev` (ou por `hotfix/*`,
-  ver abaixo). Nunca por commit direto, nunca por merge de uma feature isolada.
+- Contains released code only. Every commit on `main` corresponds to a version.
+- Protected: requires a PR, requires green checks, rejects force-push and deletion.
+- Advances **exclusively** through a release PR from `dev` (or a `hotfix/*`, see
+  below). Never through a direct commit, never through an isolated feature merge.
 
 ### `dev`
 
-- Branch de integração. É o alvo padrão de todo Pull Request.
-- Deve estar sempre verde e implantável em homologação.
-- Protegida: exige PR e checks verdes.
+- Integration branch. The default target of every Pull Request.
+- Must stay green and deployable to staging at all times.
+- Protected: requires a PR and green checks.
 
-### Branches de trabalho
+### Working branches
 
-Criadas a partir de `dev`, nomeadas por tipo:
+Created from `dev`, named by type:
 
-- `feature/<descrição-curta>` — nova funcionalidade
-- `fix/<descrição-curta>` — correção de bug
-- `chore/<descrição-curta>` — tooling, CI, dependências, documentação
+- `feature/<short-description>` — new functionality
+- `fix/<short-description>` — bug fix
+- `chore/<short-description>` — tooling, CI, dependencies, documentation
 
-Vida curta: quanto menor o PR, mais efetiva a revisão. Uma branch de trabalho
-que sobrevive semanas acumula conflito e deixa de ser revisável.
+Keep them short-lived: the smaller the PR, the more effective the review. A
+working branch that survives for weeks accumulates conflict and stops being
+reviewable.
 
-## Versionamento
+## Versioning
 
-[Semantic Versioning 2.0.0](https://semver.org/lang/pt-BR/): `vMAJOR.MINOR.PATCH`.
+[Semantic Versioning 2.0.0](https://semver.org/): `vMAJOR.MINOR.PATCH`.
 
-| Incremento | Quando                                                                    |
-| ---------- | ------------------------------------------------------------------------- |
-| `MAJOR`    | Quebra de contrato de API, ou migração de dados irreversível.              |
-| `MINOR`    | Nova funcionalidade compatível com a versão anterior.                      |
-| `PATCH`    | Correção de bug, sem mudança de contrato.                                  |
+| Increment | When                                                            |
+| --------- | --------------------------------------------------------------- |
+| `MAJOR`   | API contract break, or an irreversible data migration.           |
+| `MINOR`   | New functionality, backwards compatible.                         |
+| `PATCH`   | Bug fix, no contract change.                                     |
 
-Antes da primeira entrega em produção o projeto permanece em `0.x.y`, onde
-`MINOR` absorve quebras de contrato.
+Before the first production delivery the project stays on `0.x.y`, where `MINOR`
+absorbs contract breaks.
 
-## O PR de release
+## The release PR
 
-Quando `dev` acumula um conjunto de mudanças pronto para entrega:
+When `dev` has accumulated a set of changes ready to ship:
 
-### 1. Abrir o PR de release
+### 1. Open the release PR
 
-De `dev` para `main`, com título `Release vX.Y.Z`, usando o template de release:
+From `dev` to `main`, titled `Release vX.Y.Z`, using the release template:
 
 ```
 https://github.com/isaacgraper/sigi/compare/main...dev?template=release.md
 ```
 
-O corpo do PR lista **todos** os PRs incluídos desde a última release. Ele é o
-registro de auditoria daquela versão — vale o esforço de preenchê-lo bem.
+The body lists **every** PR included since the last release. It is the audit
+record for that version — worth the effort of filling in properly.
 
-Para levantar o que entrou desde a última tag:
+To gather what landed since the last tag:
 
 ```bash
 git log --oneline --no-merges v0.1.0..dev
 ```
 
-### 2. Preparar a versão
+### 2. Prepare the version
 
-Em uma branch `chore/release-vX.Y.Z` criada a partir de `dev`, e mesclada em
-`dev` antes do PR de release:
+On a `chore/release-vX.Y.Z` branch created from `dev`, merged into `dev` before
+the release PR:
 
-- Mover as entradas de `[Unreleased]` do `CHANGELOG.md` para uma seção
-  `[X.Y.Z] - AAAA-MM-DD`.
-- Atualizar `version` em `backend/pyproject.toml` e `frontend/package.json`.
+- Move the `[Unreleased]` entries in `CHANGELOG.md` into a `[X.Y.Z] - YYYY-MM-DD`
+  section.
+- Update `version` in `backend/pyproject.toml` and `frontend/package.json`.
 
-### 3. Revisar e mesclar
+### 3. Review and merge
 
-- Todos os checks de CI verdes.
-- Notas de migração e plano de rollback preenchidos no PR.
-- Merge com **merge commit** (nunca squash): o PR de release precisa preservar
-  o histórico individual dos PRs que ele agrega.
+- All CI checks green.
+- Migration notes and rollback plan filled in on the PR.
+- Merge with a **merge commit** (never squash): the release PR must preserve the
+  individual history of the PRs it aggregates.
 
-### 4. Marcar e publicar
+### 4. Tag and publish
 
-Logo após o merge, na `main`:
+Immediately after the merge, on `main`:
 
 ```bash
 git checkout main
@@ -108,13 +111,13 @@ git tag -a v0.2.0 -m "Release v0.2.0"
 git push origin v0.2.0
 ```
 
-Em seguida publique a GitHub Release apontando para a tag, reaproveitando o
-corpo do PR de release como notas da versão.
+Then publish the GitHub Release pointing at the tag, reusing the release PR body
+as the version notes.
 
-### 5. Sincronizar
+### 5. Synchronise
 
-`main` e `dev` devem estar idênticas logo após a release. Se o merge gerou
-commit apenas em `main`, traga-o de volta:
+`main` and `dev` must be identical right after a release. If the merge produced a
+commit only on `main`, bring it back:
 
 ```bash
 git checkout dev
@@ -124,21 +127,20 @@ git push origin dev
 
 ## Hotfix
 
-Correção urgente que não pode esperar o ciclo normal:
+An urgent fix that cannot wait for the normal cycle:
 
-1. `hotfix/<descrição>` criada a partir de `main`.
-2. PR para `main` — mesmas exigências de revisão e CI de qualquer PR.
-3. Após o merge, marcar imediatamente uma nova versão `PATCH` (`v0.2.1`).
-4. Mesclar `main` de volta em `dev`, para que a correção não se perca na próxima
-   release.
+1. `hotfix/<description>` created from `main`.
+2. PR to `main` — same review and CI requirements as any other PR.
+3. After the merge, immediately tag a new `PATCH` version (`v0.2.1`).
+4. Merge `main` back into `dev`, so the fix is not lost in the next release.
 
-Hotfix é exceção. Se está virando rotina, o problema está na cobertura de testes
-ou no tamanho das releases, não no processo.
+A hotfix is an exception. If it is becoming routine, the problem is in test
+coverage or release size, not in the process.
 
-## Regras invioláveis
+## Inviolable rules
 
-1. Ninguém faz push direto em `main` ou `dev`.
-2. `main` só recebe merge de um PR de release ou de um `hotfix/*`.
-3. Todo commit em `main` é marcado com uma tag e tem uma GitHub Release.
-4. Nenhum PR é mesclado com CI vermelho.
-5. Nenhuma tag é reescrita ou movida. Uma versão publicada é imutável.
+1. Nobody pushes directly to `main` or `dev`.
+2. `main` only ever receives a merge from a release PR or a `hotfix/*`.
+3. Every commit on `main` carries a tag and has a GitHub Release.
+4. No PR is merged with red CI.
+5. No tag is rewritten or moved. A published version is immutable.

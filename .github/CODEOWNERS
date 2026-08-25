@@ -1,9 +1,9 @@
-# Revisão obrigatória por dono de código.
-# Sintaxe: https://docs.github.com/pt/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
+# Mandatory review by code owner.
+# Syntax: https://docs.github.com/en/repositories/managing-your-repositorys-settings-and-features/customizing-your-repository/about-code-owners
 
 *                       @isaacgraper
 
-# Áreas sensíveis — mantenha revisão explícita mesmo ao adicionar colaboradores.
+# Sensitive areas — keep explicit review here even as collaborators are added.
 /docs/specs/            @isaacgraper
 /docs/security/         @isaacgraper
 /docs/architecture/     @isaacgraper
