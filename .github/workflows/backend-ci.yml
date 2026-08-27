@@ -1,0 +1,51 @@
+name: backend-ci
+
+on:
+  pull_request:
+    branches: [dev, main]
+  push:
+    branches: [dev, main]
+
+# Least privilege: CI only needs to read the code.
+permissions:
+  contents: read
+
+# Superseded runs on the same branch are cancelled, but never on dev/main —
+# every commit on an integration branch keeps its own recorded result.
+concurrency:
+  group: backend-ci-${{ github.ref }}
+  cancel-in-progress: ${{ github.ref != 'refs/heads/dev' && github.ref != 'refs/heads/main' }}
+
+jobs:
+  backend:
+    name: Backend lint and tests
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+
+    steps:
+      - uses: actions/checkout@v5
+
+      # setup-uv no longer publishes major/minor tags since v8.0.0, so the
+      # reference is the release's immutable commit — as its own README advises.
+      - name: Install uv
+        uses: astral-sh/setup-uv@20cfd1bf945f4377ade1205e4dbc17946fc9a30d # v10.0.1
+        with:
+          enable-cache: true
+
+      # --locked fails if uv.lock is stale relative to pyproject.toml,
+      # instead of silently re-resolving.
+      - name: Install dependencies
+        run: uv sync --all-groups --locked
+
+      - name: Ruff — lint
+        run: uv run ruff check .
+
+      - name: Ruff — format
+        run: uv run ruff format --check .
+
+      # Minimum 70% coverage (RNF10). Tests use a real PostgreSQL via
+      # testcontainers — the ubuntu-latest runner already provides Docker.
+      - name: Tests with coverage
+        run: uv run pytest --cov=app --cov-report=term-missing --cov-fail-under=70
