@@ -220,15 +220,31 @@ Fornecedor, HistoricoMovimentacao`. Faltam:
 
 ---
 
+## 4. Decisões registradas
+
+| # | Decisão | Data | Origem |
+| :-- | :-- | :-- | :-- |
+| D1 | **O teto do aditivo da ATA é 25%.** | 01/09/2026 | Isaac (autor do RFC) |
+
+**Contexto de D1.** As duas transcrições divergem: o áudio de `21.39.27` diz *"o máximo do
+aditivo, que é 25%"* e o de `21.39.59` diz *"pode pedir um aditivo de até 30%"*. Pelo
+horário dos arquivos, `21.39.27` precede `21.39.59` — adotou-se a **primeira menção: 25%**.
+
+Registrar em: nova regra de negócio na §2.5 (teto de aditivo sobre o valor da ATA) e no
+campo "percentual do aditivo" da tela **ATAs a renovar** (§4.2), que hoje não tem o limite
+documentado. A menção a 30% fica registrada aqui apenas como rastro — se um stakeholder
+levantar o número, esta é a origem.
+
+---
+
 ## 4. Divergências a confirmar com os stakeholders
 
 | # | Questão | Evidência conflitante |
 | :-- | :-- | :-- |
-| 1 | **Teto do aditivo: 25% ou 30%?** | Áudio 1: *"pode pedir um aditivo de até 30%"*. Áudio 2: *"o máximo do aditivo, que é 25%"*. O RFC **não menciona aditivo** — e a Tela "ATAs a renovar" depende disso. |
-| 2 | O `Estoque` do SIGI é **saldo de ATA** (v1.6) ou **estoque físico**? | Todo o §3 desta análise. Decisão estruturante. |
-| 3 | O SIGI **substitui** o painel CAME ou coexiste com ele? | O relatório é Looker Studio sobre Sheets; a reunião cogita "colocar no Data Studio" a partir do CSV do SIGI. |
-| 4 | Qual o sistema de origem de cada dado — **DOMS**, **República**, **e-Publica**? | A reunião separa: estoque = DOMS/Abranet; ATA = República. O RFC atribui ATA ao e-Publica. |
-| 5 | "Sincatarina" (citado no áudio 2 como opção de compra) é uma fonte a integrar? | Mencionado uma vez, não está no RFC. |
+| 1 | O `Estoque` do SIGI é **saldo de ATA** (v1.6) ou **estoque físico**? | Todo o §3 desta análise. Decisão estruturante. |
+| 2 | O SIGI **substitui** o painel CAME ou coexiste com ele? | O relatório é Looker Studio sobre Sheets; a reunião cogita "colocar no Data Studio" a partir do CSV do SIGI. |
+| 3 | Qual o sistema de origem de cada dado — **DOMS**, **República**, **e-Publica**? | A reunião separa: estoque = DOMS/Abranet; ATA = República. O RFC atribui ATA ao e-Publica. |
+| 4 | "Sincatarina" (citado no áudio 2 como opção de compra) é uma fonte a integrar? | Mencionado uma vez, não está no RFC. |
 
 ---
 
@@ -256,7 +272,7 @@ Fornecedor, HistoricoMovimentacao`. Faltam:
 - [ ] §7.2: resolver a contradição do cronograma.
 - [ ] Telas 2–8: substituir números fictícios por ordens de grandeza reais.
 - [ ] §2.6: incluir fórmulas/suplementos e gestão de pessoas como fora de escopo.
-- [ ] Registrar o teto do aditivo após confirmação (25% ou 30%).
+- [x] Teto do aditivo definido em **25%** (D1) — falta escrever a RN em §2.5 e o limite na tela ATAs a renovar.
 
 ---
 
