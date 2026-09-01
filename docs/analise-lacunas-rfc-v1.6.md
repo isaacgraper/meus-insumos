@@ -1,5 +1,10 @@
 # Análise de Lacunas — RFC SIGI v1.6 × Reunião de Stakeholders (17/08/2026)
 
+> **Status: endereçada.** Os achados deste documento foram incorporados em
+> [`rfc-sigi-v1.7.md`](./rfc-sigi-v1.7.md). Esta análise permanece como registro do
+> raciocínio e das evidências — a rastreabilidade de *por que* cada mudança foi feita.
+> O resumo do que mudou está no [changelog da v1.7](./rfc-sigi-v1.7.md#10-changelog-v16--v17).
+
 > Documento de trabalho. Confronta o **RFC_SIGI_v1_6.docx** (última versão; a cópia de
 > 21/08 é byte-idêntica, portanto a reunião ainda **não** foi incorporada a nenhum
 > documento) com duas fontes novas:
