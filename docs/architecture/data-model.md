@@ -68,7 +68,7 @@ Required by RF15/RN15 and by the alternative flow "solicitar aditivo à ATA".
 DOMS surrogate `mercadoriaId` (`3678`), and `Nº ITEM` (a position within a
 pregão, not an identity). `codigo` holds the DOMS client code — the only one
 shared across sources; `sku` and `codigo_externo` carry the other two so imports
-can join. `Nº ITEM` belongs to `ITEM_ATA`, not here. See OQ-18.
+can join. `Nº ITEM` belongs to `ITEM_ATA`, not here. See OQ-29.
 
 ***(2026-09-02)* `categoria` is replaced by `grupo_id`.** The real hierarchy has
 three levels (15 groups, 44 group/subgroup pairs), which a flat string cannot
@@ -186,8 +186,12 @@ a well-meaning `psql` session cannot bypass it.
   snapshot — `POSICAO_ESTOQUE_SNAPSHOT` — written only by the importer, with no
   endpoint, service or UI that mutates it, and no `entrada de estoque`
   operation. ADR-0008, accepted by ADR-0009.
-- **No `area`/`setor` on USUARIO or INSUMO** — so RN07 is unimplementable as
-  written. Adding these fields is a product decision, not a schema decision. OQ-04.
+- **No `area`/`setor` on USUARIO or INSUMO** — those field names never existed in
+  the operation. *(2026-09-02)* RN07's "área de competência" turns out to be two
+  axes the data does carry: **unidade** and **grupo de materiais**, both now
+  entities. RN07 becomes implementable as a scope on `USUARIO` referencing
+  `UNIDADE` and `GRUPO_MATERIAL`; the columns land with the SPEC-0001 revision
+  that adopts them, not before. OQ-04 resolved, OQ-26.
 
 ## Entities required by the operation
 
