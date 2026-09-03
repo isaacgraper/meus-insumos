@@ -72,7 +72,8 @@ condition for retiring the spreadsheet.
 
 **Negative** — A monthly snapshot is stale for up to a month, and users will
 read it as current unless the dating is prominent. It adds an import path, its
-validation surface (`RF30`) and its failure modes. It also softens a boundary
+validation surface — the strict-import rules in `data-sources.md` §12 — and
+its failure modes. It also softens a boundary
 that was previously absolute and therefore easy to police in review: "no stock
 data in SIGI" becomes "no stock data SIGI computes or mutates", which is a
 subtler rule that reviewers must actually understand. `CLAUDE.md` invariant 5
