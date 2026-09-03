@@ -206,7 +206,7 @@ Additionally, `Controle de ITENS` carries item lifecycle the model has no place
 for: `ITEM SUBSTITUIDO POR ITEM 43204`, `ITEM DESCONTINUADO`. The CAME dashboard
 surfaces the same concept as `SUGESTÕES DE TROCA`. An item that is substituted
 keeps historical NEs pointing at the old code — which is exactly the case `RN14`
-forbids and the operation performs. See OQ-18 and OQ-23.
+forbids and the operation performs. See OQ-29 and OQ-23.
 
 ---
 
@@ -294,11 +294,16 @@ vocabulary — evidence the two are coupled, not independent.
 
 ---
 
-## 12. Format hazards — input for RF30
+## 12. Format hazards — input for the import capability
 
 Every one of these appears in the supplied files. An importer that assumes
-otherwise corrupts data silently, which is the precise failure `RF30` exists to
-prevent.
+otherwise corrupts data silently.
+
+> **Numbering note.** Earlier drafts called strict import validation `RF30`.
+> That number belongs to `docs/rfc-sigi-v1.7.md`, which is **superseded** and
+> whose `RF04`–`RF30` range collides with `requirements/functional.md` (`RF05`
+> and `RN11` mean different things in each). No requirement number is cited here
+> until one is allocated from `functional.md`'s own sequence. See OQ-28.
 
 | Hazard | Observed | Consequence |
 | --- | --- | --- |
@@ -368,8 +373,8 @@ the export cadence itself is renegotiated with the entity. See OQ-25.
 | Saldo is tracked per item in quantity | OQ-20 (resolved) — model both |
 | 32,5% divergence between stored and derived saldo | ADR-0003 (confirms) |
 | 17 ATA statuses spanning two state machines | OQ-21 (resolved) — `PROCESSO_LICITATORIO` |
-| Four item identifiers; items get substituted | OQ-18, OQ-23, SPEC-0003, RN14 |
-| Three-level material hierarchy | OQ-18, SPEC-0003 |
+| Four item identifiers; items get substituted | OQ-29, OQ-23, SPEC-0003, RN14 |
+| Three-level material hierarchy | OQ-29, SPEC-0003 |
 | Five fulfilment quantities; no `UNIDADE` entity | OQ-26 (resolved) — `UNIDADE`, `SOLICITACAO`, `ITEM_SOLICITACAO` |
 | Inventory parameters already computed at source | ADR-0008 (accepted) — `POSICAO_ESTOQUE_SNAPSHOT` |
 | 6,4% of ATAs have more than one fornecedor | OQ-11 (resolved) |
