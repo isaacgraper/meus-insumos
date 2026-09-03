@@ -93,7 +93,7 @@ unique and immutable. The data carries four identifiers for the same item: the
 CAME `SKU` (`CLORDEG21`), the DOMS client code (`26829`), the DOMS surrogate
 `mercadoriaId` (`3678`), and `Nº ITEM` (a position within a pregão, not an
 identity). `INSUMO` gains `sku` and `codigo_externo` so imports can join on
-whichever the source provides; `codigo` remains the DOMS client code. See OQ-18.
+whichever the source provides; `codigo` remains the DOMS client code. See OQ-29.
 
 **Categories are a three-level hierarchy.** `categoria` is a flat string; the
 source has `Grupo mercadoria` → `SubGrupo Mercadoria` →
@@ -121,4 +121,4 @@ this spec's validation ACs.
 | Version | Date | Change |
 | --- | --- | --- |
 | 0.1 | 2026-08-17 | Initial draft from RFC §2.3 RF03/RF07, Tela 3, mockup 9.2.2.2, §9.5 CAME mapping |
-| 0.2 | 2026-09-02 | Four item identifiers recorded (OQ-18); three-level hierarchy replaces flat `categoria`; substitution/discontinuation modelled (OQ-23); concrete import hazards from real files; §4 reconciled with ADR-0008 |
+| 0.2 | 2026-09-02 | Four item identifiers recorded (OQ-29); three-level hierarchy replaces flat `categoria`; substitution/discontinuation modelled (OQ-23); concrete import hazards from real files |

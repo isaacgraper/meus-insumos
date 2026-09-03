@@ -29,7 +29,7 @@ Requirements with no spec. This list must be empty before M5.
 | --- | --- |
 | RF16 (reajuste) | Not yet specified — needs the entity's price-revision policy. OQ-08 is now partially answered: `DATA LIMITE REAJUSTE` exists per item, so the window is tracked; index and approver are still unknown. |
 | ~~RF20, RF21~~ | ~~Deliberately deferred post-MVP.~~ **2026-09-02: no longer unmapped.** The stated reason (no consumption history at launch) was false — the entity exports it. Both are **in scope** under ADR-0008/ADR-0009 and need specs of their own. |
-| RN07 | Blocked on OQ-04 (no area/setor attribute exists). Candidate axes now visible in the data: `unidade` and `grupo de materiais`. See OQ-26. |
+| RN07 | No longer blocked: OQ-04 is resolved and the two axes are `unidade` and `grupo de materiais`, both now entities (OQ-26). Unmapped only until SPEC-0001 adopts them as a scope on `USUARIO`. |
 
 ## Spec → NFR
 
@@ -71,7 +71,7 @@ version bump and a changelog line; additions take the next free number.
 | --- | --- | --- |
 | SPEC-0002 | AC-0002-* covering ATA import — re-scope to manual registration + CSV of items; ATA status enum | OQ-02, OQ-19, OQ-21 |
 | SPEC-0005 | RN12 AC compares against `Σ ITEM_NOTA_EMPENHO.valor` | ADR-0007 |
-| SPEC-0003 | Validation ACs gain the concrete import hazards in `data-sources.md` §12; four identifiers; `GRUPO_MATERIAL` | OQ-18, OQ-23 |
+| SPEC-0003 | Validation ACs gain the concrete import hazards in `data-sources.md` §12; four identifiers; `GRUPO_MATERIAL` | OQ-29, OQ-23 |
 | SPEC-0001 | Entra ID as the primary mechanism; RN07 scoped by unidade and grupo de materiais | OQ-09, OQ-04 |
 
 ### Capabilities with no spec at all
