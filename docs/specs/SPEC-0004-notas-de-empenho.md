@@ -63,7 +63,7 @@ Invariants this spec owns:
 ### 4.1 The state machine
 
 ```
-                        ┌──────────────────────────────────┐
+                        ┌────────────────────────────────────┐
                         │            reversal (gestor)         │
                         ▼                                      │
    ┌─────────┐   ┌──────────────────┐   ┌──────────────┐   ┌────────────────┐   ┌─────────────┐
@@ -72,7 +72,7 @@ Invariants this spec owns:
         │                 │                                                            │
         │                 └── saldo insuficiente ──▶ blocked, stays in validacao_saldo  │
         │                                                                              │
-        └── cancelamento (gestor, com justificativa) ──▶ [cancelada] ◀────────────────┘
+        └── cancelamento (gestor, com justificativa) ──▶ [cancelada] ◀──────────────────┘
                                                                     (not allowed from ne_emitida)
 ```
 
@@ -457,6 +457,6 @@ partially advanced NE.
 
 | Version | Date | Change |
 | --- | --- | --- |
-| 0.1 | 2026-08-17 | Initial draft from RFC §2.3 RF13, §2.5 RN03/RN08/RN09, Tela 6 |
+| 0.1 | 2026-08-17 | Initial draft from RFC v1.6 §2.3 RF13, §2.5 RN03/RN08/RN09/RN10, §3.1, §4.2 Tela 6 |
 | 0.2 | 2026-09-02 | OQ-05 resolved from data: NEs are multi-item (27,8%, up to 37 insumos). ADR-0007. Impact on AC-0004-01/02/12-16 described; state machine unaffected; OQ-27 opened |
 | 0.3 | 2026-09-02 | ACs rewritten for multi-item NEs (ADR-0007): 01, 02, 12, 13, 14, 16 revised; 19–24 added, covering empty NEs, duplicate and foreign items, frozen itens (OQ-27), price snapshot and quantity exhaustion (OQ-20). OQ-05/OQ-06 resolved; OQ-07/OQ-27 marked Assumed |
